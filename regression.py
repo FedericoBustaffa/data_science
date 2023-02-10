@@ -18,7 +18,7 @@ plt.xlabel("Altezza")
 plt.ylabel("Peso")
 plt.grid(True)
 
-plt.scatter(x_m, y_m, c="blue")
+plt.scatter(x_m, y_m, color="blue")
 plt.plot(x, y, "b--")
 
 x_f = np.array([150, 155, 160, 170, 180]).reshape(-1, 1)
@@ -31,7 +31,7 @@ y = model.predict(x)
 
 print(f"M: {model.coef_}\tQ: {y[0][0] - model.coef_ * x[0][0]}")
 
-plt.scatter(x_f, y_f, c="red")
+plt.scatter(x_f, y_f, color="red")
 plt.plot(x, y, "r--")
 
 plt.show()
