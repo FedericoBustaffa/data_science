@@ -3,36 +3,32 @@ import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
 
-data = pd.read_csv("data_set.csv")
+# data set
+data = pd.read_csv("data.csv")
+heights = np.array(data.altezza).reshape(-1, 1)
+weights = np.array(data.peso).reshape(-1, 1)
 
-x_m = np.array([150, 155, 160, 165, 170, 175, 180, 185, 190]).reshape(-1, 1)
-y_m = np.array([60, 65, 70, 75, 80, 85, 90, 95, 100]).reshape(-1, 1)
-
+# learning
 model = LinearRegression()
-model.fit(x_m, y_m)
+model.fit(heights, weights)
 
-x = np.linspace(150, 190, 50).reshape(-1, 1)
+# samples
+x = np.linspace(100, 250, 50).reshape(-1, 1)
 y = model.predict(x)
 
-print(f"M: {model.coef_}\tQ: {y[0][0] - model.coef_ * x[0][0]}")
+# coefficienti retta regressione
+print(f"coefficiente angolare: {model.coef_}")
+print(f"intersezione ordinate: {y[0][0] - model.coef_ * x[0][0]}")
 
+# plotting
 plt.title("Regressione lineare")
 plt.xlabel("Altezza")
 plt.ylabel("Peso")
+plt.xlim(145, 205)
+plt.ylim(0, 150)
 plt.grid(True)
 
-plt.scatter(x_m, y_m, color="blue")
-plt.plot(x, y, "b--")
-
-x_f = np.array([150, 155, 160, 165, 170, 175, 180, 185, 190]).reshape(-1, 1)
-y_f = np.array([50, 55, 60, 65, 75, 80, 85, 90, 95]).reshape(-1, 1)
-
-model.fit(x_f, y_f)
-y = model.predict(x)
-
-print(f"M: {model.coef_}\tQ: {y[0][0] - model.coef_ * x[0][0]}")
-
-plt.scatter(x_f, y_f, color="red")
-plt.plot(x, y, "r--")
+plt.scatter(heights, weights, color="black")
+plt.plot(x, y, "r", label="reg_line")
 
 plt.show()
